@@ -5,6 +5,7 @@ find_package(daq-cmake REQUIRED)
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 find_package(detdataformats REQUIRED)
 find_package(CLI11 REQUIRED)
+find_package(HighFive REQUIRED)
 
 daq_setup_environment()
 
@@ -12,7 +13,7 @@ daq_setup_environment()
 ##############################################################################
 # Main library
 
-daq_add_library(LINK_LIBRARIES)
+daq_add_library(LINK_LIBRARIES detdataformats::detdataformats HighFive)
 
 
 ##############################################################################

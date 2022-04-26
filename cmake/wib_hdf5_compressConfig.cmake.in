@@ -5,6 +5,7 @@ include(CMakeFindDependencyMacro)
 
 find_dependency(detdataformats)
 find_dependency(CLI11)
+find_dependency(HighFive)
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/@PROJECT_NAME@)
 
