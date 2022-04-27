@@ -141,6 +141,6 @@ main(int argc, char** argv)
   size_t compressed_size = get_file_size(out_filename);
   size_t compressed_size_MB = compressed_size / 1024 / 1024;
   std::cout << "Compressed size " << compressed_size_MB << "MB" << std::endl;
-  std::cout << "Compression ratio: " << (static_cast<double>(size)/compressed_size) << std::endl;
+  std::cout << "Frame chunk: " << frame_chunk << ". Channel chunk: " << channel_chunk << ". Compression ratio: " << (static_cast<double>(size)/compressed_size) << std::endl;
   return 0;
 }
