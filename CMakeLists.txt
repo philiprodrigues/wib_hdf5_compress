@@ -28,5 +28,6 @@ daq_add_library(LINK_LIBRARIES detdataformats::detdataformats HighFive)
 ##############################################################################
 # Applications
 daq_add_application(write_wib_hdf5 write_wib_hdf5.cxx TEST LINK_LIBRARIES wib_hdf5_compress CLI11::CLI11)
+daq_add_application(write_wib_fragment_style write_wib_fragment_style.cxx TEST LINK_LIBRARIES wib_hdf5_compress CLI11::CLI11)
 
 daq_install()
