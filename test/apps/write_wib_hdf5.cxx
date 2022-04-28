@@ -31,6 +31,7 @@ size_t get_file_size(std::string filename)
 void write_hdf5_file(std::string filename,
                      size_t frame_chunk,
                      size_t channel_chunk,
+                     bool shuffle,
                      const std::vector<std::vector<int16_t>>& array)
 {
   const size_t n_frames = array.size();
@@ -44,9 +45,11 @@ void write_hdf5_file(std::string filename,
   HighFive::DataSetCreateProps props;
   props.add(HighFive::Chunking(std::vector<hsize_t>{ frame_chunk, channel_chunk }));
 
-  // Enable shuffle
-  props.add(HighFive::Shuffle());
-
+  if (shuffle) {
+    // Enable shuffle
+    props.add(HighFive::Shuffle());
+  }
+  
   // Enable deflate
   props.add(HighFive::Deflate(3));
 
@@ -128,13 +131,17 @@ main(int argc, char** argv)
 
   bool diff = false;
   app.add_flag("-d,--diff", diff, "Do frame-to-frame difference");
-  
+
+  bool shuffle = false;
+  app.add_flag("-s,--shuffle", shuffle, "Apply HDF5 shuffle filter");
+
   CLI11_PARSE(app, argc, argv);
 
   auto array = fill_array_from_raw_file(in_filename, max_n_frames, diff);
   write_hdf5_file(out_filename,
                   frame_chunk,
                   channel_chunk,
+                  shuffle,
                   array);
   
   size_t size = array.size() * frame_size;
